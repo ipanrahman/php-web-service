@@ -1,7 +1,9 @@
 <?php
 
-namespace controllers;
-
-class UserController
+class UserController extends Controller
 {
+    public function index()
+    {
+        echo "hello";
+    }
 }
