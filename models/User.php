@@ -77,4 +77,33 @@ class User extends Model
         }
         return $this->findById($id);
     }
+
+    public function update($data)
+    {
+        $sql = "UPDATE users SET first_name=:first_name,last_name=:last_name,email=:email,phone_number=:phone_number WHERE id=:id";
+
+        $connection = self::getConnection();
+
+        $id = $data['id'];
+
+        try {
+            $connection->beginTransaction();
+
+            $statement = $connection->prepare($sql);
+
+            $statement->execute([
+                'id' => $id,
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'email' => $data['email'],
+                'phone_number' => $data['phone_number']
+            ]);
+
+            $connection->commit();
+        } catch (Exception $e) {
+            print "Error" . $e->getMessage();
+            $connection->rollBack();
+        }
+        return $this->findById($id);
+    }
 }

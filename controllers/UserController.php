@@ -20,15 +20,37 @@ class UserController extends Controller
 
     public function createUser()
     {
+        $request = file_get_contents("php://input");
+        $body = json_decode($request, true);
+
         $data = [
-            'first_name' => $_POST['first_name'],
-            'last_name' => $_POST['last_name'],
-            'email' => $_POST['email'],
-            'phone_number' => $_POST['phone_number']
+            'first_name' => $body['first_name'],
+            'last_name' => $body['last_name'],
+            'email' => $body['email'],
+            'phone_number' => $body['phone_number']
         ];
 
         $this->model('user');
         $result = $this->user->save($data);
+
+        $this->ok($result);
+    }
+
+    public function updateUser($id)
+    {
+        $request = file_get_contents("php://input");
+        $body = json_decode($request, true);
+
+        $data = [
+            'id' => $id,
+            'first_name' => $body['first_name'],
+            'last_name' => $body['last_name'],
+            'email' => $body['email'],
+            'phone_number' => $body['phone_number']
+        ];
+
+        $this->model('user');
+        $result = $this->user->update($data);
 
         $this->ok($result);
     }

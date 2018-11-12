@@ -118,7 +118,9 @@ class Router
      */
     private static function getActiveMethod()
     {
-        return count($_POST) > 0 ? 'post' : 'get';
+        $method = $_SERVER['REQUEST_METHOD'];
+
+        return strtolower($method);
     }
 
     /**
@@ -266,7 +268,7 @@ class Router
     }
 
     /**
-     * Add route with get method
+     * Add route with post method
      *
      * @param string $route
      * @param string|closure $callback
@@ -275,6 +277,18 @@ class Router
     public function post($route, $callback)
     {
         $this->registerRoute(self::cleanUrl($route), $callback, 'post');
+    }
+
+    /**
+     * Add route with put method
+     *
+     * @param string $route
+     * @param string|closure $callback
+     * @return void
+     */
+    public function put($route, $callback)
+    {
+        $this->registerRoute(self::cleanUrl($route), $callback, 'put');
     }
 
     /**
