@@ -55,4 +55,16 @@ class UserController extends Controller
         $this->ok($result);
     }
 
+    public function deleteUser($id)
+    {
+        $this->model('user');
+        $validate = $this->user->findById($id);
+        if (count($validate) === 0) {
+            $this->notFound('User Id' . $id . ' Not Found');
+        } else {
+            $this->user->delete($id);
+            $this->ok(null);
+        }
+    }
+
 }

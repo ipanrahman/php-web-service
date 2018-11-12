@@ -13,3 +13,4 @@ $route->get("/users", "UserController@index");
 $route->post("/users/", "UserController@createUser");
 $route->get("/users/{id}", "UserController@getUserById");
 $route->put("/users/{id}", "UserController@updateUser");
+$route->delete("/users/{id}", "UserController@deleteUser");

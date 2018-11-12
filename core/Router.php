@@ -292,6 +292,18 @@ class Router
     }
 
     /**
+     * Add route with put method
+     *
+     * @param string $route
+     * @param string|closure $callback
+     * @return void
+     */
+    public function delete($route, $callback)
+    {
+        $this->registerRoute(self::cleanUrl($route), $callback, 'delete');
+    }
+
+    /**
      * Add route with get method
      *
      * @param string $route

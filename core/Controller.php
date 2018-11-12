@@ -34,7 +34,7 @@ class Controller extends Model
         header('Content-type: ' . $contentType);
     }
 
-    protected function result($code, $message, $data, $errors = null)
+    protected function result($code, $message, $data = null, $errors = null)
     {
         return array(
             'code' => $code,
@@ -42,5 +42,12 @@ class Controller extends Model
             'data' => $data,
             'errors' => $errors
         );
+    }
+
+    protected function notFound($message)
+    {
+        $this->checkIfExistsContentType($this->contentType);
+        echo json_encode($this->result(503, $message));
+        return $this;
     }
 }
