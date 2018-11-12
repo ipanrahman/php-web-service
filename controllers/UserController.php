@@ -60,7 +60,9 @@ class UserController extends Controller
         $this->model('user');
         $validate = $this->user->findById($id);
         if (count($validate) === 0) {
-            $this->notFound('User Id' . $id . ' Not Found');
+            $this->badRequest([
+                'id' => 'Id ' . $id . ' Not Found'
+            ]);
         } else {
             $this->user->delete($id);
             $this->ok(null);

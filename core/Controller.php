@@ -16,6 +16,7 @@ class Controller extends Model
     protected function ok($data)
     {
         $this->checkIfExistsContentType($this->contentType);
+        http_response_code(200);
         echo json_encode($this->result(200, 'Success', $data));
         return $this;
     }
@@ -44,10 +45,11 @@ class Controller extends Model
         );
     }
 
-    protected function notFound($message)
+    protected function badRequest($errors = null)
     {
         $this->checkIfExistsContentType($this->contentType);
-        echo json_encode($this->result(503, $message));
+        http_response_code(400);
+        echo json_encode($this->result(400, 'Bad Request', null, $errors));
         return $this;
     }
 }
