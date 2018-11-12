@@ -18,9 +18,19 @@ class UserController extends Controller
         $this->ok($user);
     }
 
-    public function createUser($data)
+    public function createUser()
     {
+        $data = [
+            'first_name' => $_POST['first_name'],
+            'last_name' => $_POST['last_name'],
+            'email' => $_POST['email'],
+            'phone_number' => $_POST['phone_number']
+        ];
 
+        $this->model('user');
+        $result = $this->user->save($data);
+
+        $this->ok($result);
     }
 
 }

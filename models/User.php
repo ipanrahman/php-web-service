@@ -47,4 +47,34 @@ class User extends Model
         }
         return $result;
     }
+
+    public function save($data)
+    {
+        $sql = "INSERT INTO users(id,first_name,last_name,email,phone_number,created_date,updated_date) VALUES"
+            . "(:id,:first_name,:last_name,:email,:phone_number,now(),now())";
+
+        $connection = self::getConnection();
+
+        $id = $this->randomId();
+
+        try {
+            $connection->beginTransaction();
+
+            $statement = $connection->prepare($sql);
+
+            $statement->execute([
+                'id' => $id,
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'email' => $data['email'],
+                'phone_number' => $data['phone_number']
+            ]);
+
+            $connection->commit();
+        } catch (Exception $e) {
+            print "Error" . $e->getMessage();
+            $connection->rollBack();
+        }
+        return $this->findById($id);
+    }
 }

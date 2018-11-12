@@ -2,6 +2,7 @@
 
 abstract class Model
 {
+
     protected static function getConnection()
     {
         try {
@@ -13,5 +14,16 @@ abstract class Model
             error_log($e->getMessage());
             return null;
         }
+    }
+
+    protected function randomId()
+    {
+        $connection = self::getConnection();
+        $query = $connection->prepare("SELECT uuid() AS id");
+        $query->execute();
+
+        $result = $query->fetch();
+
+        return $result['id'];
     }
 }
