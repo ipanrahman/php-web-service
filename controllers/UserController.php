@@ -7,9 +7,7 @@ class UserController extends Controller
         $this->model('user');
         $users = $this->user->findAll();
 
-        header('Content-type:application/json');
-
-        echo json_encode($users);
+        $this->ok($users);
     }
 
     public function getUserById($id)
@@ -18,6 +16,11 @@ class UserController extends Controller
         $user = $this->user->findById($id);
 
         $this->ok($user);
+    }
+
+    public function createUser($data)
+    {
+
     }
 
 }

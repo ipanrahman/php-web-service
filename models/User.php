@@ -11,14 +11,17 @@ class User extends Model
         $query->execute();
 
         $result = array();
+        $index = 0;
 
-        while ($row = $query->fetch()) {
-            $result = [
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            $result[$index++] = [
                 "id" => $row['id'],
                 "first_name" => $row['first_name'],
                 "last_name" => $row['last_name'],
                 "email" => $row['email'],
-                "phone_number" => $row['phone_number']
+                "phone_number" => $row['phone_number'],
+                "created_at" => $row['created_date'],
+                "updated_at" => $row['updated_date']
             ];
         }
         return $result;
@@ -37,7 +40,9 @@ class User extends Model
                 "first_name" => $row['first_name'],
                 "last_name" => $row['last_name'],
                 "email" => $row['email'],
-                "phone_number" => $row['phone_number']
+                "phone_number" => $row['phone_number'],
+                "created_at" => $row['created_date'],
+                "updated_at" => $row['updated_date']
             ];
         }
         return $result;
