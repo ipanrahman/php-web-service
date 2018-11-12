@@ -20,8 +20,8 @@ class User extends Model
                 "last_name" => $row['last_name'],
                 "email" => $row['email'],
                 "phone_number" => $row['phone_number'],
-                "created_at" => $row['created_date'],
-                "updated_at" => $row['updated_date']
+                "created_date" => $row['created_date'],
+                "updated_date" => $row['updated_date']
             ];
         }
         return $result;
@@ -41,8 +41,8 @@ class User extends Model
                 "last_name" => $row['last_name'],
                 "email" => $row['email'],
                 "phone_number" => $row['phone_number'],
-                "created_at" => $row['created_date'],
-                "updated_at" => $row['updated_date']
+                "created_date" => $row['created_date'],
+                "updated_date" => $row['updated_date']
             ];
         }
         return $result;
