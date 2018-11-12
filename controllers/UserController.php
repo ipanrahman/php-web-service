@@ -26,6 +26,9 @@ class UserController extends Controller
         $data = [
             'first_name' => $body['first_name'],
             'last_name' => $body['last_name'],
+            'gender' => $body['gender'],
+            'birth_date' => $body['birth_date'],
+            'place_of_birth' => $body['place_of_birth'],
             'email' => $body['email'],
             'phone_number' => $body['phone_number']
         ];
@@ -45,6 +48,9 @@ class UserController extends Controller
             'id' => $id,
             'first_name' => $body['first_name'],
             'last_name' => $body['last_name'],
+            'gender' => $body['gender'],
+            'birth_date' => $body['birth_date'],
+            'place_of_birth' => $body['place_of_birth'],
             'email' => $body['email'],
             'phone_number' => $body['phone_number']
         ];
