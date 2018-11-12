@@ -15,17 +15,16 @@ class Controller extends Model
 
     protected function ok($data)
     {
-        if ($this->contentType == null) {
-            header('Content-type: application/json');
-        }
-        $result = [
-            'code' => 200,
-            'message' => 'success',
-            'data' => $data,
-            'errors' => null
-        ];
-        echo json_encode($result);
+        $this->checkIfExistsContentType($this->contentType);
+        echo json_encode($this->result(200, 'Success', $data));
         return $this;
+    }
+
+    private function checkIfExistsContentType($contentType)
+    {
+        if ($contentType == null) {
+            $this->contentType("application/json");
+        }
     }
 
     protected function contentType($contentType)
@@ -33,5 +32,15 @@ class Controller extends Model
         $this->contentType = $contentType;
 
         header('Content-type: ' . $contentType);
+    }
+
+    protected function result($code, $message, $data, $errors = null)
+    {
+        return array(
+            'code' => $code,
+            'message' => $message,
+            'data' => $data,
+            'errors' => $errors
+        );
     }
 }
