@@ -83,9 +83,34 @@ class Product extends Model
             'name' => $data['name'],
             'price' => $data['price'],
             'photo_url' => $data['photo_url'],
-            'user_id' => $data['user_id'],
+            'user_id' => $data['user_id']
         ]);
 
         return $this->findById($id);
+    }
+
+    public function update($data)
+    {
+        $sql = "UPDATE products SET name=:name,price=:price,photo_url=:photo_url,user_id=:user_id,updated_date=current_timestamp WHERE id=:id";
+        $connection = self::getConnection();
+        $id = $data['id'];
+        $statement = $connection->prepare($sql);
+        $statement->execute([
+            'id' => $id,
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'photo_url' => $data['photo_url'],
+            'user_id' => $data['user_id']
+        ]);
+        return $this->findById($id);
+    }
+
+    public function delete($id)
+    {
+        $sql = "DELETE FROM products WHERE id=:id";
+
+        $connection = self::getConnection();
+        $statement = $connection->prepare($sql);
+        $statement->execute(['id' => $id]);
     }
 }

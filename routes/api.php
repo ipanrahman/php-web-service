@@ -21,3 +21,5 @@ $route->get("/products", 'ProductController@getAllProduct');
 $route->get("/products/{id}", 'ProductController@getProductById');
 $route->get("/products/users/{id}", 'ProductController@getAllProductByUserId');
 $route->post("/products", "ProductController@createProduct");
+$route->put("/products/{id}", "ProductController@updateProduct");
+$route->delete("/products/{id}", "ProductController@deleteProduct");
