@@ -1,6 +1,6 @@
-CREATE DATABASE uts_web_service;
+CREATE DATABASE api;
 
-USE uts_web_service;
+USE api;
 
 CREATE TABLE users(
   id VARCHAR(36),

@@ -1,25 +1,27 @@
 <?php
 
-require PATH . "core/Router.php";
+use Libs\Router;
 
-$route = new Router(PATH . "controllers/");
+$route = new Router();
+$route->setNamespace('\App\Controllers');
 
 // index
-
 $route->get('/', 'HomeController@index');
 
 // users
-$route->get("/users", "UserController@index");
-$route->post("/users/", "UserController@createUser");
-$route->get("/users/{id}", "UserController@getUserById");
-$route->put("/users/{id}", "UserController@updateUser");
-$route->delete("/users/{id}", "UserController@deleteUser");
+$route->get("/api/users", "UserController@index");
+$route->post("/api/users/", "UserController@createUser");
+$route->get("/api/users/{id}", "UserController@getUserById");
+$route->put("/api/users/{id}", "UserController@updateUser");
+$route->delete("/api/users/{id}", "UserController@deleteUser");
 
 
 // products
-$route->get("/products", 'ProductController@getAllProduct');
-$route->get("/products/{id}", 'ProductController@getProductById');
-$route->get("/products/users/{id}", 'ProductController@getAllProductByUserId');
-$route->post("/products", "ProductController@createProduct");
-$route->put("/products/{id}", "ProductController@updateProduct");
-$route->delete("/products/{id}", "ProductController@deleteProduct");
+$route->get("/api/products", 'ProductController@getAllProduct');
+$route->get("/api/products/{id}", 'ProductController@getProductById');
+$route->get("/api/products/users/{id}", 'ProductController@getAllProductByUserId');
+$route->post("/api/products", "ProductController@createProduct");
+$route->put("/api/products/{id}", "ProductController@updateProduct");
+$route->delete("/api/products/{id}", "ProductController@deleteProduct");
+
+$route->run();

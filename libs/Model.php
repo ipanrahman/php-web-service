@@ -1,12 +1,16 @@
 <?php
 
+namespace Libs;
+
+use PDO;
+
 abstract class Model
 {
 
     protected static function getConnection()
     {
         try {
-            $pdo = new \PDO("mysql:host=localhost;dbname=uts_web_service", "root", "");
+            $pdo = new PDO("mysql:host=localhost;dbname=my_crud", "root", "root");
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             return $pdo;

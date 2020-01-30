@@ -1,12 +1,14 @@
 <?php
 
+namespace Libs;
+
 class Controller extends Model
 {
     private $contentType;
 
     protected function model($file)
     {
-        require PATH . "models/" . $file . ".php";
+        require PATH . "Models/" . $file . ".php";
 
         $this->{$file} = new $file;
 
@@ -38,8 +40,10 @@ class Controller extends Model
     protected function result($code, $message, $data = null, $errors = null)
     {
         return array(
-            'code' => $code,
-            'message' => $message,
+            'meta' => [
+                'code' => $code,
+                'message' => $message,
+            ],
             'data' => $data,
             'errors' => $errors
         );

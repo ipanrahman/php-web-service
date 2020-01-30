@@ -1,11 +1,22 @@
 <?php
 
+namespace App\Controllers;
+
+use Libs\Controller;
+use App\Models\User;
+
 class UserController extends Controller
 {
+    private $model;
+
+    public function __construct()
+    {
+        $this->model = new User();
+    }
+
     public function index()
     {
-        $this->model('user');
-        $users = $this->user->findAll();
+        $users = $this->model->findAll();
 
         $this->ok($users);
     }
