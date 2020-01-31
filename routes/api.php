@@ -8,6 +8,10 @@ $route->setNamespace('\App\Controllers');
 // index
 $route->get('/', 'HomeController@index');
 
+// Auth Route
+$route->post("/api/auth/login", "AuthController@login");
+$route->post("/api/auth/register", "AuthController@register");
+
 // users
 $route->get("/api/users", "UserController@index");
 $route->post("/api/users/", "UserController@createUser");

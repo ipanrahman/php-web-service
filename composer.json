@@ -7,7 +7,8 @@
     "ext-json": "*",
     "ext-pdo": "*",
     "twig/twig": "^3.0",
-    "doctrine/orm": "^2.6.2"
+    "doctrine/orm": "^2.6.2",
+    "nesbot/carbon": "^2.29"
   },
   "license": "MIT",
   "authors": [
