@@ -25,11 +25,17 @@ class AuthController extends Controller
         $username = $body['username'];
         $password = $body['password'];
 
-        if ($username == 'admin' && $password == 'admin') {
+        $user = $this->userRepository->findByEmail($username);
+        if (Bcrypt::checkPassword($password, $user['password'])) {
             $result = [
                 'access_token' => base64_encode(Carbon::now())
             ];
             $this->ok($result);
+        } else {
+            $result = [
+                'message' => 'Username or password wrong!'
+            ];
+            return $this->badRequest($result);
         }
     }
 

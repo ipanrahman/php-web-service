@@ -47,4 +47,23 @@ class UserRepository
         }
         return $result;
     }
+
+    public function findByEmail($email)
+    {
+        $query = $this->db->prepare("SELECT *FROM users WHERE email=?");
+        $query->execute([$email]);
+
+        $result = array();
+
+        while ($row = $query->fetch()) {
+            $result = [
+                "id" => $row['id'],
+                'name' => $row['name'],
+                'phone_number' => $row['phone_number'],
+                'email' => $row['email'],
+                'password' => $row['password'],
+            ];
+        }
+        return $result;
+    }
 }
