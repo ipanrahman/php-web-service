@@ -20,7 +20,7 @@ class Database
         }
     }
 
-    protected function randomId()
+    public static function randomId()
     {
         $connection = self::getConnection();
         $query = $connection->prepare("SELECT uuid() AS id");

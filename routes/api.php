@@ -25,7 +25,10 @@ $route->get("/api/products", 'ProductController@getAllProduct');
 $route->get("/api/products/{id}", 'ProductController@getProductById');
 $route->get("/api/products/users/{id}", 'ProductController@getAllProductByUserId');
 $route->post("/api/products", "ProductController@createProduct");
-$route->put("/api/products/{id}", "ProductController@updateProduct");
+$route->post("/api/products/{id}", "ProductController@updateProduct");
 $route->delete("/api/products/{id}", "ProductController@deleteProduct");
+
+// Images Route
+$route->get("/images/{fileName}", "ImageController@getImage");
 
 $route->run();

@@ -3,119 +3,100 @@
 namespace App\Models;
 
 use Libs\Model;
-use PDO;
 
 class Product extends Model
 {
-    public function findAll()
+    private $id;
+
+    private $name;
+
+    private $price;
+
+    private $photoUrl;
+
+    private $description;
+
+    // getter and setter
+
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
-        $query = self::getConnection()->prepare("SELECT *FROM products");
-        $query->execute();
-
-        $result = array();
-        $index = 0;
-
-        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-            $result[$index++] = [
-                "id" => $row['id'],
-                "name" => $row['name'],
-                "price" => $row['price'],
-                'photo_url' => $row['photo_url'],
-                'user_id' => $row['user_id'],
-                "created_date" => $row['created_date'],
-                "updated_date" => $row['updated_date']
-            ];
-        }
-        return $result;
+        return $this->id;
     }
 
-    public function findById($id)
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
     {
-        $query = self::getConnection()->prepare("SELECT *FROM products WHERE id=?");
-        $query->execute([$id]);
-
-        $result = array();
-
-        while ($row = $query->fetch()) {
-            $result = [
-                "id" => $row['id'],
-                'name' => $row['name'],
-                'title' => $row['title'],
-                'price' => $row['price'],
-                'photo_url' => $row['photo_url'],
-                'user_id' => $row['user_id'],
-                'created_date' => $row['created_date'],
-                'updated_date' => $row['updated_date']
-            ];
-        }
-        return $result;
+        $this->id = $id;
     }
 
-    public function findByUserId($userId)
+    /**
+     * @return mixed
+     */
+    public function getName()
     {
-        $query = self::getConnection()->prepare("SELECT *FROM products WHERE user_id=?");
-        $query->execute([$userId]);
+        return $this->name;
+    }
 
-        $result = array();
-        $index = 0;
-        while ($row = $query->fetch()) {
-            $result[$index] = [
-                "id" => $row['id'],
-                'name' => $row['name'],
-                'title' => $row['title'],
-                'price' => $row['price'],
-                'photo_url' => $row['photo_url'],
-                'user_id' => $row['user_id'],
-                'created_date' => $row['created_date'],
-                'updated_date' => $row['updated_date']
-            ];
-            $index++;
-        }
-        return $result;
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price): void
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotoUrl()
+    {
+        return $this->photoUrl;
+    }
+
+    /**
+     * @param mixed $photoUrl
+     */
+    public function setPhotoUrl($photoUrl): void
+    {
+        $this->photoUrl = $photoUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
     }
 
 
-    public function save($data)
-    {
-        $sql = "INSERT INTO products(id,name,price,photo_url,user_id,created_date,updated_date) VALUES"
-            . "(:id,:name,:price,:photo_url,:user_id,current_timestamp,current_timestamp)";
-
-        $connection = self::getConnection();
-        $id = $this->randomId();
-        $statement = $connection->prepare($sql);
-        $statement->execute([
-            'id' => $id,
-            'name' => $data['name'],
-            'price' => $data['price'],
-            'photo_url' => $data['photo_url'],
-            'user_id' => $data['user_id']
-        ]);
-
-        return $this->findById($id);
-    }
-
-    public function update($data)
-    {
-        $sql = "UPDATE products SET name=:name,price=:price,photo_url=:photo_url,user_id=:user_id,updated_date=current_timestamp WHERE id=:id";
-        $connection = self::getConnection();
-        $id = $data['id'];
-        $statement = $connection->prepare($sql);
-        $statement->execute([
-            'id' => $id,
-            'name' => $data['name'],
-            'price' => $data['price'],
-            'photo_url' => $data['photo_url'],
-            'user_id' => $data['user_id']
-        ]);
-        return $this->findById($id);
-    }
-
-    public function delete($id)
-    {
-        $sql = "DELETE FROM products WHERE id=:id";
-
-        $connection = self::getConnection();
-        $statement = $connection->prepare($sql);
-        $statement->execute(['id' => $id]);
-    }
 }

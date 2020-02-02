@@ -1,6 +1,6 @@
-CREATE DATABASE api;
+CREATE DATABASE kp_express_db;
 
-USE rest_api;
+USE kp_express_db;
 
 CREATE TABLE users(
   id VARCHAR(36),
